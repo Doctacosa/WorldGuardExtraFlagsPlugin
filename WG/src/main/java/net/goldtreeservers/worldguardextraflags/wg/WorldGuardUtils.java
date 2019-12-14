@@ -42,6 +42,11 @@ public class WorldGuardUtils
 		{
 			return true;
 		}
+
+		if (player.hasPermission("worldguardextraflags.apply"))
+		{
+			return false;
+		}
 		
 		//Permission system that supports wildcars is really helpful here :)
 		if (player.hasPermission("worldguard.region.bypass." + world.getName() + "." + region.getId() + "." + flag.getName()))
