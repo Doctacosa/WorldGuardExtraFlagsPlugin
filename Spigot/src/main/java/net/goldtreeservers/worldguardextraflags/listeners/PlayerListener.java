@@ -214,15 +214,14 @@ public class PlayerListener implements Listener
 	}
 
 	@EventHandler(priority = EventPriority.HIGHEST)
-	public void onPlayerSpawnLocationEvent(PlayerSpawnLocationEvent event)
-	{
+	public void onPlayerJoin(PlayerJoinEvent event) {
 		Player player = event.getPlayer();
 		LocalPlayer localPlayer = WorldGuardPlugin.inst().wrapPlayer(player);
 
-		Location location = this.regionContainer.createQuery().queryValue(BukkitAdapter.adapt(event.getSpawnLocation()), localPlayer, Flags.JOIN_LOCATION);
+		Location location = this.regionContainer.createQuery().queryValue(BukkitAdapter.adapt(player.getLocation()), localPlayer, Flags.JOIN_LOCATION);
 		if (location != null)
 		{
-			event.setSpawnLocation(BukkitAdapter.adapt(location));
+			player.teleport(BukkitAdapter.adapt(location));
 		}
 	}
 	
